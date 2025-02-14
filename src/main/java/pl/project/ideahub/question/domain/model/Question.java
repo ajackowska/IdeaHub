@@ -1,6 +1,10 @@
-package pl.project.ideahub;
+package pl.project.ideahub.question.domain.model;
+
+import java.util.UUID;
 
 public class Question {
+
+    private UUID id;
 
     private String name;
 
@@ -9,6 +13,7 @@ public class Question {
 
     public Question(String name) {
         this.name = name;
+        this.id = UUID.randomUUID();
     }
 
     public String getName() {
@@ -19,10 +24,19 @@ public class Question {
         this.name = name;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Question{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 '}';
     }
 }
