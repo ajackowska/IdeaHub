@@ -2,7 +2,6 @@ package pl.project.ideahub.question.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.project.ideahub.IdeaHubConfiguration;
 import pl.project.ideahub.question.service.QuestionService;
 import pl.project.ideahub.question.domain.model.Question;
 
@@ -11,11 +10,11 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/questions")
-public class QuestionController {
+public class QuestionApiController {
 
     private final QuestionService questionService;
 
-    public QuestionController(QuestionService questionService) {
+    public QuestionApiController(QuestionService questionService) {
         this.questionService = questionService;
     }
 
@@ -46,7 +45,4 @@ public class QuestionController {
     public void deleteQuestion(@PathVariable UUID id) {
         questionService.deleteQuestion(id);
     }
-
-
-
 }

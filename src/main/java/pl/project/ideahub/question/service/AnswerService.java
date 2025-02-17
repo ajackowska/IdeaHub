@@ -12,7 +12,8 @@ public class AnswerService {
     public List<Answer> getAnswers(UUID questionId) {
         return Arrays.asList(
                 new Answer("answer 1"),
-                new Answer("answer 2")
+                new Answer("answer 2"),
+                new Answer("answer 3")
         );
     }
 

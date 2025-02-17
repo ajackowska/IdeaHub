@@ -13,7 +13,8 @@ public class CategoryService {
     public List<Category> getCategories() {
         return Arrays.asList(
                 new Category("category 1"),
-                new Category("category 2")
+                new Category("category 2"),
+                new Category("category 3")
         );
     }
 
