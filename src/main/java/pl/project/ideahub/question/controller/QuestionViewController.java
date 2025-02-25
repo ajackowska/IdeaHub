@@ -36,7 +36,6 @@ public class QuestionViewController {
         model.addAttribute("categories", categoryService.getCategories());
 
         return "question/index";
-//        return "template";
     }
 
     @GetMapping("{id}")
