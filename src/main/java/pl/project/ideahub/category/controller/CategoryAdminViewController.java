@@ -10,11 +10,11 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin/categories")
-public class   CategoryViewController {
+public class CategoryAdminViewController {
 
     private final CategoryService categoryService;
 
-    public CategoryViewController(CategoryService categoryService) {
+    public CategoryAdminViewController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
@@ -33,6 +33,12 @@ public class   CategoryViewController {
     @PostMapping("{id}")
     public String edit(@ModelAttribute("category") Category category, @PathVariable UUID id) {
         categoryService.updateCategory(id, category);
+        return "redirect:/admin/categories";
+    }
+
+    @GetMapping("{id}/delete")
+    public String deleteView(@PathVariable UUID id) {
+        categoryService.deleteCategory(id);
         return "redirect:/admin/categories";
     }
 }
