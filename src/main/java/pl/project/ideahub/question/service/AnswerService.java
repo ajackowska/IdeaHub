@@ -1,34 +1,59 @@
 package pl.project.ideahub.question.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.project.ideahub.question.domain.model.Answer;
+import pl.project.ideahub.question.domain.model.Question;
+import pl.project.ideahub.question.domain.repository.AnswerRepository;
+import pl.project.ideahub.question.domain.repository.QuestionRepository;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class AnswerService {
+
+    private final AnswerRepository answerRepository;
+
+    private final QuestionService questionService;
+    private final QuestionRepository questionRepository;
+
+    public AnswerService(AnswerRepository answerRepository, QuestionService questionService, QuestionRepository questionRepository) {
+        this.answerRepository = answerRepository;
+        this.questionService = questionService;
+        this.questionRepository = questionRepository;
+    }
+
+    @Transactional(readOnly = true)
     public List<Answer> getAnswers(UUID questionId) {
-        return Arrays.asList(
-                new Answer("answer 1"),
-                new Answer("answer 2"),
-                new Answer("answer 3")
-        );
+        return answerRepository.findByQuestionId(questionId);
     }
 
+    @Transactional(readOnly = true)
     public Answer getAnswer(UUID id) {
-        return new Answer("answer " + id);
+        return answerRepository.getById(id);
     }
 
-    public void deleteAnswer(UUID id) {
+    @Transactional
+    public void deleteAnswer(UUID answerId) {
+        answerRepository.deleteById(answerId);
     }
 
-    public Answer createAnswer(UUID questionId, Answer answer) {
-        return null;
+    @Transactional
+    public Answer createAnswer(UUID questionId, Answer answerRequest) {
+        Answer answer = new Answer();
+        answer.setName(answerRequest.getName());
+        Question question = questionRepository.getById(questionId);
+        question.addAnswer(answer);
+        answerRepository.save(answer);
+        questionRepository.save(question);
+        return answer;
     }
 
-    public Answer updateAnswer(UUID id, Answer answer) {
-        return null;
+    @Transactional
+    public Answer updateAnswer(UUID answerId, Answer answerRequest) {
+        Answer answer = answerRepository.getById(answerId);
+        answer.setName(answerRequest.getName());
+        return answerRepository.save(answer);
     }
 }
