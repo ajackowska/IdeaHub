@@ -39,7 +39,7 @@ public class CategoryService {
     public Category updateCategory(UUID id, Category categoryRequest) {
         Category category = categoryRepository.getById(id);
         category.setName(categoryRequest.getName());
-        return category;
+        return categoryRepository.save(category);
     }
 
     @Transactional
