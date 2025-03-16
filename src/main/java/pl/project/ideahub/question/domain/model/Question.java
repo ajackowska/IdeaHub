@@ -15,6 +15,7 @@ public class Question {
     private String name;
 
     @ManyToOne
+//    @JoinColumn(name = "category_id")
     private Category category;
 
     @OneToMany(mappedBy = "question")

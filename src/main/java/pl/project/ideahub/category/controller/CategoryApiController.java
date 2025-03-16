@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("categories")
+@RequestMapping("api/v1/categories")
 public class CategoryApiController {
 
     private final CategoryService categoryService;
